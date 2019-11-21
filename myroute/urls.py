@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from account.views import UserViewSet
-from post.views import PostViewSet
+from post.views import (PostViewSet, PostDetail)
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('posts/', PostViewSet.as_view())
+    path('posts/', PostViewSet.as_view()),
+    path('posts/<postkey>/', PostDetail)
 ]

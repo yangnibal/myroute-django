@@ -3,16 +3,17 @@ from .models import Post
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='author.username', read_only=True)
+    postkey = serializers.CharField(read_only=True)
 
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author']
+        fields = ['title', 'content', 'author', 'postkey']
 
-    '''def create(self, validated_data):
+    def create(self, validated_data):
         return Post.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance=title)
         instance.content = validated_data.get('content', instance=content)
         instance.save()
-        return instance'''
+        return instance
